@@ -1,44 +1,29 @@
 const path = require( 'path' );
-const HtmlWebpackPlugin = require( 'html-webpack-plugin' );
 
 module.exports = {
   mode: 'development',
   entry: './src/index.js',
-  watch: true,
   output: {
     path: path.join( __dirname, 'public' ),
     filename: "bundle.js",
-    chunkFilename: '[name].js'
   },
   module: {
     rules: [ {
       test: /\.js$/,
-      include: [
-        path.resolve( __dirname, 'src' )
-      ],
+      loader: 'babel-loader',
       exclude: [
         path.resolve( __dirname, 'node_modules' ),
         path.resolve( __dirname, 'src/playground' )
       ],
-      loader: 'babel-loader',
-      query: {
-        presets: [
-          [ "@babel/preset-env", "@babel/preset-react", {
-            "targets": {
-              "browsers": "last 2 chrome versions"
-            }
-          } ]
-        ],
+      options: {
+        presets: [ "@babel/preset-env", "@babel/preset-react" ],
         plugins: [ "@babel/plugin-proposal-class-properties", "react-hot-loader/babel" ],
       }
     },
     {
-      test: /\.scss$/,
+      test: /\.s?css$/,
       use: [ 'style-loader', 'css-loader', 'sass-loader' ],
     } ]
-  },
-  resolve: {
-    extensions: [ '.json', '.js', '.jsx' ]
   },
   devtool: 'eval-cheap-module-source-map',
   devServer: {
@@ -46,10 +31,6 @@ module.exports = {
     inline: true,
     host: 'localhost',
     port: 8000,
+    historyApiFallback: true, // Tells the dev-server to look for routes in the public folder
   },
-  plugins: [
-    new HtmlWebpackPlugin( {
-      template: path.resolve( './public/index.html' ),
-    } ),
-  ]
 };

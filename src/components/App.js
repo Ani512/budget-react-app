@@ -1,14 +1,15 @@
 // import logo from '../images/logo.svg';
+import React from 'react';
 
-const App = () =>
+class App extends React.Component
 {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>Anirudh Umarji</p>
-      </header>
-    </div>
-  );
-};
+  render ()
+  {
+    return (
+      <div className="m-auto">
+      </div>
+    );
+  }
+}
 
 export default App;
