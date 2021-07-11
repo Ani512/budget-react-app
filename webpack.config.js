@@ -9,11 +9,11 @@ module.exports = {
   },
   module: {
     rules: [ {
-      test: /\.js$/,
+      test: /\.js$|jsx/,
       loader: 'babel-loader',
       exclude: [
         path.resolve( __dirname, 'node_modules' ),
-        path.resolve( __dirname, 'src/playground' )
+        // path.resolve( __dirname, 'src/playground' )
       ],
       options: {
         presets: [ "@babel/preset-env", "@babel/preset-react" ],
