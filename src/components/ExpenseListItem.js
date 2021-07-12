@@ -21,4 +21,5 @@ let mapStateToProps = ( state ) =>
     };
 };
 
+// connect API
 export default connect( mapStateToProps )( Item );
