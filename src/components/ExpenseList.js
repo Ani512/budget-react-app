@@ -5,7 +5,7 @@ import manageExpenses from '../selectors/expenses';
 
 const ExpenseList = ( props ) => (
     <div>
-        <h1>ExpenseList</h1>
+        <h1>Expense List</h1>
         { props.expenses.map( ( expense ) => <Item expense={ expense } key={ expense.id } /> ) }
     </div>
 );

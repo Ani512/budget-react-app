@@ -1,12 +1,33 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import ExpenseForm from './ExpenseForm';
+import { editExpense, removeExpense } from '../actions/expenses';
 
 const EditExpense = ( props ) =>
 {
     return (
         <div>
-            <p>Editing the Expense with id { props.match.params.id }</p>
+            <ExpenseForm
+                onAddExp={ ( expense ) =>
+                {
+                    props.dispatch( editExpense( props.expenses.id, expense ) );
+                    props.history.push( '/dash' );
+                } }
+                expense={ props.expenses } />
+            <button className="btn btn-danger mb-3 me-2 btn-sm" onClick={ () =>
+            {
+                props.dispatch( removeExpense( { id: props.expenses.id } ) );
+                props.history.push( '/dash' );
+            } }>Remove</button>
         </div>
     );
 };
 
-export default EditExpense;
+let mapStateToProps = ( state, props ) =>
+{
+    return {
+        expenses: state.expenses.find( ( expense ) => expense.id === props.match.params.id )
+    };
+};
+
+export default connect( mapStateToProps )( EditExpense );

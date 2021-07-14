@@ -1,25 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import manageExpenses from '../selectors/expenses';
-import { removeExpense } from '../actions/expenses';
+import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 const Item = ( props ) => (
     <div>
-        <h4>{ props.expense.description }</h4>
-        <p>${ props.expense.amount } on { props.expense.createdAt }</p>
-        <button className="btn btn-danger mb-3" onClick={ () =>
-        {
-            props.dispatch( removeExpense( { id: props.expense.id } ) );
-        } }>Remove</button>
+        <Link to={ `/edit/${ props.expense.id }` }>
+            <h4>{ props.expense.description }</h4>
+        </Link>
+        <p>${ props.expense.amount } on { moment( props.expense.createdAt ).format( 'MMMM Do YYYY' ) }</p>
     </div>
 );
-
-let mapStateToProps = ( state ) =>
-{
-    return {
-        expenses: manageExpenses( state.expenses, state.filters )
-    };
-};
-
-// connect API
-export default connect( mapStateToProps )( Item );
+export default Item;
