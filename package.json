@@ -57,10 +57,11 @@
         "webpack-dev-server": "^3.11.2"
     },
     "scripts": {
-        "serve": "live-server public/",
+        "serve": "webpack serve --hot --open",
         "build:dev": "webpack --progress",
         "build:prod": "webpack --mode production",
         "build-babel": "babel src/index.js --out-file=public/app.js --presets=env,react --watch",
-        "start": "webpack serve --hot --open"
+        "start": "node serve/server.js",
+        "heroku-postbuild": "yarn run build:prod"
     }
 }

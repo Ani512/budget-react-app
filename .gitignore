@@ -12,10 +12,12 @@ package-lock.json
 yarn-error.log
 
 # production
-/build
+/public
 
 # deployment
-/dist
+/dist/bundle.js
+/dist/bundle.js.LICENSE.txt
+/dist/bundle.js.map
 
 # misc
 .DS_Store
