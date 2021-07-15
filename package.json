@@ -61,11 +61,7 @@
         "build:dev": "webpack --progress",
         "build:prod": "webpack --mode production",
         "build-babel": "babel src/index.js --out-file=public/app.js --presets=env,react --watch",
-        "start": "node serve/server.js",
+        "start": "node server/server.js",
         "heroku-postbuild": "yarn run build:prod"
-    },
-    "engines": {
-        "node": "^15.14.0",
-        "npm": "^7.10.0"
     }
 }
