@@ -4,7 +4,6 @@ import './styles/index.scss';
 import Router from './routers/Router';
 import { Provider } from 'react-redux';
 import configureStore from './store/configStore';
-import 'normalize.css';
 
 const store = configureStore();
 
