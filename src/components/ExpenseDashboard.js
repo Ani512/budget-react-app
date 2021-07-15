@@ -1,9 +1,10 @@
 import React from 'react';
 import ExpenseList from './ExpenseList';
-import { setFilterText } from '../actions/filters';
 import { connect } from 'react-redux';
 import { DateRangePicker } from 'react-dates';
-import { sortByAmount, sortByDate, setStartDate, setEndDate } from '../actions/filters';
+import { sortByAmount, sortByDate, setStartDate, setEndDate, setFilterText } from '../actions/filters';
+import { visibleExpenses, totalExpenses, totalNumberOfExpenses } from '../selectors/expenses';
+import numeral from 'numeral';
 
 class ExpenseDashboard extends React.Component
 {
@@ -54,6 +55,10 @@ class ExpenseDashboard extends React.Component
                     <span className="input-group-text">Text Filter</span>
                     <input type="text" className="form-control" name="filter" value={ this.props.filters.text } onChange={ this.handleTextFilter }></input>
                 </form>
+                { this.props.totalNumberOfExpenses > 0
+                    ? <h3>Viewing { this.props.totalNumberOfExpenses } expense/s totalling up to { numeral( this.props.totalExpenses ).format( '$0,0.00' ) }</h3>
+                    : <h3>No Expenses</h3>
+                }
                 <ExpenseList />
             </div>
         );
@@ -62,8 +67,11 @@ class ExpenseDashboard extends React.Component
 
 const mapStateToProps = ( state ) =>
 {
+    let currentExpenses = visibleExpenses( state.expenses, state.filters );
     return {
-        filters: state.filters
+        filters: state.filters,
+        totalExpenses: totalExpenses( currentExpenses ),
+        totalNumberOfExpenses: totalNumberOfExpenses( currentExpenses )
     };
 };
 

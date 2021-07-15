@@ -1,4 +1,4 @@
-const manageExpenses = ( expenses, { text, sortBy, startDate, endDate } ) =>
+const visibleExpenses = ( expenses, { text, sortBy, startDate, endDate } ) =>
 {
     return expenses.filter( ( expense ) =>
     {
@@ -18,4 +18,19 @@ const manageExpenses = ( expenses, { text, sortBy, startDate, endDate } ) =>
     } );
 };
 
-export default manageExpenses;
+const totalExpenses = ( expenses ) =>
+{
+    let total = 0;
+    expenses.forEach( ( expense ) =>
+    {
+        total += expense.amount;
+    } );
+    return total;
+};
+
+const totalNumberOfExpenses = ( expenses ) =>
+{
+    return expenses.length;
+};
+
+export { visibleExpenses, totalExpenses, totalNumberOfExpenses };
