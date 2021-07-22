@@ -6,9 +6,10 @@ import 'react-dates/lib/css/_datepicker.css';
 
 class ExpenseForm extends React.Component
 {
+    // constructor written because the expense form should show previous data in edit mode 
     constructor ( props )
     {
-        super( props );
+        super( props ); // Access to this keyword 
 
         this.state = {
             description: props.expense ? props.expense.description : '',
