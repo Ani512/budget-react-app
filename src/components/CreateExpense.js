@@ -10,7 +10,7 @@ const Create = ( props ) =>
         <ExpenseForm onAddExp={ ( expense ) =>
         {
             props.dispatch( startAddExpenses( expense ) );
-            props.history.push( '/' );
+            props.history.push( '/dash' );
         } } />
     </div>
 );

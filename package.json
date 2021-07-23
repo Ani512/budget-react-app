@@ -25,7 +25,6 @@
         "react-router-dom": "^5.2.0",
         "react-scripts": "4.0.3",
         "redux-thunk": "^2.3.0",
-        "tailwindcss": "^2.2.4",
         "three-dots": "^0.2.1",
         "web-vitals": "^1.0.1"
     },

@@ -5,7 +5,7 @@ import '../node_modules/three-dots/dist/three-dots.min.css';
 import Router from './routers/Router';
 import { Provider } from 'react-redux';
 import configureStore from './store/configStore';
-import './firebase/firebase';
+import { firebase, googleAuthProvider } from './firebase/firebase';
 import { startSetExpenses } from './actions/expenses';
 
 const store = configureStore();
@@ -18,12 +18,22 @@ let loading = (
     </div>
 );
 
-
 let jsx = (
     <Provider store={ store }>
         <Router />
     </Provider>
 );
+
+firebase.auth().onAuthStateChanged( ( user ) =>
+{
+    if ( user )
+    {
+        console.log( 'Logged In' );
+    } else
+    {
+        console.log( 'Logged Out' );
+    }
+} );
 
 render( loading, document.getElementById( 'root' ) );
 

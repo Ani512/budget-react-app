@@ -11,13 +11,13 @@ const EditExpense = ( props ) =>
                 onAddExp={ ( expense ) =>
                 {
                     props.dispatch( startUpdateExpense( props.expenses.id, expense ) );
-                    props.history.push( '/' );
+                    props.history.push( '/dash' );
                 } }
                 expense={ props.expenses } />
             <button className="btn btn-danger mb-3 me-2 btn-sm" onClick={ () =>
             {
                 props.dispatch( startRemoveExpense( props.expenses.id ) );
-                props.history.push( '/' );
+                props.history.push( '/dash' );
             } }>Remove</button>
         </div>
     );

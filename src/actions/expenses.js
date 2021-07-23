@@ -71,11 +71,11 @@ const startUpdateExpense = ( id, expenses ) =>
             createdAt = 0
         } = expenses;
 
-        let expense = { description, note, amount, createdAt };
+        let updates = { description, note, amount, createdAt };
 
-        database.ref( `expenses/${ id }` ).update( expense ).then( () =>
+        database.ref( `expenses/${ id }` ).update( updates ).then( () =>
         {
-            dispatch( editExpense( id, expenses ) );
+            dispatch( editExpense( id, updates ) );
         } ).catch( ( error ) =>
         {
             console.log( error );
