@@ -20,8 +20,7 @@ class Router extends React.Component
             <BrowserRouter>
                 <Header />
                 <Switch>
-                    <Route exact path="/" component={ App } />
-                    <Route path="/dash" component={ ExpenseDashboard } />
+                    <Route exact path="/" component={ ExpenseDashboard } />
                     <Route path="/create" component={ Create } />
                     <Route path="/edit/:id" component={ EditExpense } />
                     <Route path="/help" component={ Help } />
@@ -35,3 +34,5 @@ class Router extends React.Component
 // :id , here, id is the variable 
 
 export default Router;
+
+// {/* <Route exact path="/" component={ App } /> */ }

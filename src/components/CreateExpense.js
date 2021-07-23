@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ExpenseForm from './ExpenseForm';
-import { startAddExpense } from '../actions/expenses';
+import { startAddExpenses } from '../actions/expenses';
 
 const Create = ( props ) =>
 (
@@ -9,8 +9,8 @@ const Create = ( props ) =>
         <h2>Add Expense</h2>
         <ExpenseForm onAddExp={ ( expense ) =>
         {
-            props.dispatch( startAddExpense( expense ) );
-            props.history.push( '/dash' );
+            props.dispatch( startAddExpenses( expense ) );
+            props.history.push( '/' );
         } } />
     </div>
 );

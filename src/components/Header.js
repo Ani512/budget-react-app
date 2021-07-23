@@ -7,10 +7,7 @@ const Header = () => (
             <h1 className="text-center">Budget Calculator</h1>
         </div>
         <div>
-            <NavLink exact to="/" className="btn-toHome m-2" activeClassName="h-active">
-                Home
-            </NavLink>
-            <NavLink to="/dash" className="btn-toDash m-2" activeClassName="h-active">
+            <NavLink exact to="/" className="btn-toDash m-2" activeClassName="h-active">
                 Dashboard
             </NavLink>
             <NavLink to="/create" className="btn-toCreate m-2" activeClassName="h-active">
