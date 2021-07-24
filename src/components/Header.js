@@ -9,7 +9,7 @@ const Header = ( props ) => (
             <h1 className="text-center">Budget Calculator</h1>
         </div>
         <div>
-            <NavLink exact to="/dash" className="btn-toDash m-2" activeClassName="h-active">
+            <NavLink to="/dash" className="btn-toDash m-2" activeClassName="h-active">
                 Dashboard
             </NavLink>
             <NavLink to="/create" className="btn-toCreate m-2" activeClassName="h-active">

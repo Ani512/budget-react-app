@@ -8,6 +8,7 @@ import Help from '../components/Help';
 import Page404 from '../components/NotFoundPage';
 import { createBrowserHistory } from 'history';
 import PrivateRouter from './PrivateRouter';
+import PublicRouter from './PublicRouter';
 
 export const history = createBrowserHistory();
 
@@ -18,7 +19,7 @@ class AppRouter extends React.Component
         return (
             <Router history={ history }>
                 <Switch>
-                    <Route exact path="/" component={ LoginPage } />
+                    <PublicRouter exact path="/" component={ LoginPage } />
                     <PrivateRouter path="/dash" component={ ExpenseDashboard } />
                     <PrivateRouter path="/create" component={ Create } />
                     <PrivateRouter path="/edit/:id" component={ EditExpense } />
@@ -33,5 +34,3 @@ class AppRouter extends React.Component
 // :id , here, id is the variable 
 
 export default AppRouter;
-
-// {/* <Route exact path="/dash/" component={ LoginPage } /> */ }

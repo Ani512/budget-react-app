@@ -15,7 +15,7 @@ const store = configureStore();
 let loading = (
     <div>
         <h3>Loading</h3>
-        <div className="dot-typing ms-5"></div>
+        <div className="dot-typing ms-5 mt-4 mb-3"></div>
         <p>Getting Data from Firebase</p>
     </div>
 );
@@ -42,7 +42,6 @@ firebase.auth().onAuthStateChanged( ( user ) =>
 {
     if ( user )
     {
-        // console.log( `${ user.email } : Logged In` );
         store.dispatch( login( user.uid ) );
         store.dispatch( startSetExpenses() ).then( () =>
         {
@@ -51,7 +50,6 @@ firebase.auth().onAuthStateChanged( ( user ) =>
         if ( history.location.pathname === '/' ) history.push( `/dash` );
     } else
     {
-        // console.log( 'Logged Out' );
         store.dispatch( logout() );
         renderApp();
         history.push( '/' );
