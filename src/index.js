@@ -1,20 +1,21 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { Provider } from 'react-redux';
 import './styles/index.scss';
 import '../node_modules/three-dots/dist/three-dots.min.css';
 import AppRouter from './routers/Router';
-import { Provider } from 'react-redux';
 import configureStore from './store/configStore';
-import { firebase, googleAuthProvider } from './firebase/firebase';
+import { firebase } from './firebase/firebase';
 import { startSetExpenses } from './actions/expenses';
 import { history } from './routers/Router';
+import { login, logout } from './actions/auth';
 
 const store = configureStore();
 
 let loading = (
     <div>
         <h3>Loading</h3>
-        <div className="dot-elastic ms-5"></div>
+        <div className="dot-typing ms-5"></div>
         <p>Getting Data from Firebase</p>
     </div>
 );
@@ -41,7 +42,8 @@ firebase.auth().onAuthStateChanged( ( user ) =>
 {
     if ( user )
     {
-        console.log( `${ user.email } : Logged In` );
+        // console.log( `${ user.email } : Logged In` );
+        store.dispatch( login( user.uid ) );
         store.dispatch( startSetExpenses() ).then( () =>
         {
             renderApp();
@@ -49,7 +51,8 @@ firebase.auth().onAuthStateChanged( ( user ) =>
         if ( history.location.pathname === '/' ) history.push( `/dash` );
     } else
     {
-        console.log( 'Logged Out' );
+        // console.log( 'Logged Out' );
+        store.dispatch( logout() );
         renderApp();
         history.push( '/' );
     }
