@@ -12,8 +12,9 @@ const startAddExpenses = ( expenseData ) =>
 {
     // Requires Redux Thunk
     // Thunk Helps in making Async Calls - First the firebase call is made and then the redux call is made 
-    return ( dispatch ) =>
+    return ( dispatch, getState ) =>
     {
+        const userId = getState().auth.uid;
         const {
             description = '',
             note = '',
@@ -22,7 +23,7 @@ const startAddExpenses = ( expenseData ) =>
         } = expenseData;
 
         let expense = { description, note, amount, createdAt };
-        database.ref( 'expenses' ).push( expense ).then( ( ref ) =>
+        database.ref( `users/${ userId }/expenses` ).push( expense ).then( ( ref ) =>
         {
             dispatch( addExpense( { id: ref.key, ...expense } ) );
         } ).catch( ( error ) => console.log( error ) );
@@ -41,9 +42,10 @@ const removeExpense = (
 
 const startRemoveExpense = ( id ) =>
 {
-    return ( dispatch ) =>
+    return ( dispatch, getState ) =>
     {
-        database.ref( `expenses/${ id }` ).remove().then( () =>
+        const userId = getState().auth.uid;
+        database.ref( `users/${ userId }/expenses/${ id }` ).remove().then( () =>
         {
             dispatch( removeExpense( { id: id } ) );
         } ).catch( ( error ) =>
@@ -62,8 +64,9 @@ const editExpense = ( id = undefined, updates ) => ( {
 
 const startUpdateExpense = ( id, expenses ) =>
 {
-    return ( dispatch ) =>
+    return ( dispatch, getState ) =>
     {
+        const userId = getState().auth.uid;
         const {
             description = '',
             note = '',
@@ -73,7 +76,7 @@ const startUpdateExpense = ( id, expenses ) =>
 
         let updates = { description, note, amount, createdAt };
 
-        database.ref( `expenses/${ id }` ).update( updates ).then( () =>
+        database.ref( `users/${ userId }/expenses/${ id }` ).update( updates ).then( () =>
         {
             dispatch( editExpense( id, updates ) );
         } ).catch( ( error ) =>
@@ -93,9 +96,10 @@ const setExpense = ( expenses ) => (
 const startSetExpenses = () =>
 {
     let expenses = [];
-    return ( dispatch ) =>
+    return ( dispatch, getState ) =>
     {
-        return database.ref( 'expenses' ).once( 'value' ).then( ( snapshot ) =>
+        const userId = getState().auth.uid;
+        return database.ref( `users/${ userId }/expenses` ).once( 'value' ).then( ( snapshot ) =>
         {
             snapshot.forEach( ( child ) =>
             {
