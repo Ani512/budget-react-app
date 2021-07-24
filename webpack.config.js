@@ -1,15 +1,14 @@
 const path = require( 'path' );
-const HtmlWebpackPlugin = require( 'html-webpack-plugin' );
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 
 module.exports = () =>
 {
   return {
-    mode: 'development',
-    // mode: 'production',
+    // mode: 'development',
+    mode: 'production',
     entry: './src/index.js',
     output: {
-      path: path.join( __dirname, 'public' ), // public during dev 
+      path: path.join( __dirname, 'dist' ), // public during dev 
       filename: "bundle.js",
     },
     module: {
@@ -41,8 +40,8 @@ module.exports = () =>
       },
       ]
     },
-    devtool: 'eval-cheap-module-source-map', // (Only required during Dev)
-    // devtool: 'source-map',
+    // devtool: 'eval-cheap-module-source-map', // (Only required during Dev)
+    devtool: 'source-map',
     devServer: {
       contentBase: path.join( __dirname, 'public' ),  // public during dev 
       inline: true,
@@ -51,9 +50,6 @@ module.exports = () =>
       historyApiFallback: true, // Tells the dev-server to look for routes in the public folder
     },
     plugins: [
-      new HtmlWebpackPlugin( {
-        template: path.resolve( './public/index.html' ),
-      } ),
       new MiniCssExtractPlugin( {
         filename: 'style.css',
         chunkFilename: '[id].css'

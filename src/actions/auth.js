@@ -2,10 +2,26 @@ import { firebase, googleAuthProvider } from '../firebase/firebase';
 
 const startLogin = () =>
 {
-    return ( dispatch ) =>
+    return () =>
     {
-        return firebase.auth().signInWithPopup( googleAuthProvider );
+        firebase.auth().setPersistence( firebase.auth.Auth.Persistence.SESSION ).then( () =>
+        {
+            return firebase.auth().signInWithPopup( googleAuthProvider );
+        } ).catch( ( error ) =>
+        {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            console.log( `${ errorCode } : ${ errorMessage }` );
+        } );
     };
 };
 
-export default startLogin;
+const startLogout = () =>
+{
+    return () =>
+    {
+        return firebase.auth().signOut();
+    };
+};
+
+export { startLogin, startLogout };

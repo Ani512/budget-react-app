@@ -1,7 +1,7 @@
 import React from 'react';
 import { FiLogIn } from 'react-icons/fi';
 import { connect } from 'react-redux';
-import startLogin from '../actions/auth';
+import { startLogin } from '../actions/auth';
 
 const LoginPage = ( props ) =>
 (
